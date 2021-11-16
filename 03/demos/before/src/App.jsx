@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Footer from "./Footer";
 import Header from "./Header";
-import { getProducts } from './services/productService';
 import Spinner from './Spinner';
+import useFetch from './services/useFetch';
 
 
 
 export default function App() {
     const [size, setSize] = useState("");
-    const [products, setProducts] = useState([]);
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(true);
+
+    const { data: products, loading, error } = useFetch(
+        "products?category=shoes"
+    );
 
     // the above is equivalent to
     // const state = useState('');
@@ -20,19 +21,19 @@ export default function App() {
 
     // async await
     // this is syntatic sugar over promises
-    useEffect(() => {
-        async function init(params) {
-            try {
-                const response = await getProducts('shoes');
-                setProducts(response);
-            } catch (e) {
-                setError(e)
-            } finally {
-                setLoading(false)
-            }
-        } 
-        init()
-    }, [])
+    // useEffect(() => {
+    //     async function init(params) {
+    //         try {
+    //             const response = await getProducts('shoes');
+    //             setProducts(response);
+    //         } catch (e) {
+    //             setError(e)
+    //         } finally {
+    //             setLoading(false)
+    //         }
+    //     } 
+    //     init()
+    // }, [])
 
     // Promoise version
     // useEffect(() => {
