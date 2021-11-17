@@ -1,4 +1,10 @@
 import React from "react";
+import { Link, NavLink } from 'react-router-dom';
+
+const activeStyle = {
+  color: 'purple'
+}
+// NavLink works like Link except it lets you add a class for styling
 
 export default function Header() {
   return (
@@ -6,7 +12,15 @@ export default function Header() {
       <nav>
         <ul>
           <li>
-            <img alt="Carved Rock Fitness" src="/images/logo.png" />
+            <Link to='/'>
+              <img alt="Carved Rock Fitness" src="/images/logo.png" />
+            </Link>
+          </li>
+          <li>
+            <NavLink activeStyle={activeStyle} to='/shoes'>Shoes</NavLink>
+          </li>
+          <li>
+            <NavLink activeStyle={activeStyle} to='/cart'>Cart</NavLink>
           </li>
         </ul>
       </nav>
