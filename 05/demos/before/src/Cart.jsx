@@ -2,7 +2,7 @@ import React from "react";
 import useFetchAll from "./services/useFetchAll";
 import Spinner from "./Spinner";
 
-export default function Cart({ cart, updateQuantity }) {
+export default function Cart({ cart, updateQuantity }) { // equivalent to props.cart & props.updateQuantity
   const urls = cart.map((i) => `products/${i.id}`);
   const { data: products, loading, error } = useFetchAll(urls);
 
@@ -42,9 +42,16 @@ export default function Cart({ cart, updateQuantity }) {
   if (loading) return <Spinner />;
   if (error) throw error;
 
+
+  const numItemsInCart = cart.reduce((total, item) => total + item.quantity, 0);
+
   return (
     <section id="cart">
-      <h1>Cart</h1>
+      <h1>
+        {numItemsInCart === 0
+          ? "Your cart is empty"
+          : `${numItemsInCart} Item${numItemsInCart > 1 ? "s" : ""} in My Cart`}
+      </h1>
       <ul>{cart.map(renderItem)}</ul>
     </section>
   );
