@@ -34,3 +34,9 @@ export default function useFetch(url) {
 
   return { data, error, loading };
 }
+
+// So we can consume our hook in any class component
+export function Fetch({url, children }) {
+  const { data, loading, error} = useFetch(url);
+  return children(data, loading, error)
+}

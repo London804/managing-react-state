@@ -6,9 +6,11 @@ import Products from "./Products";
 import { Routes, Route } from "react-router-dom";
 import Detail from "./Detail";
 import Cart from "./Cart";
-import Checkout from "./Checkout";
+import Checkout from "./Checkout.class";
+import { useCart } from "./cartContext";
 
 export default function App() {
+  const { dispatch } = useCart();
   return (
     <>
       <div className="content">
@@ -19,7 +21,7 @@ export default function App() {
             <Route path="/:category" element={<Products />} />
             <Route path="/:category/:id" element={<Detail />} />
             <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/checkout" element={<Checkout dispatch={dispatch} />} />
           </Routes>
         </main>
       </div>
